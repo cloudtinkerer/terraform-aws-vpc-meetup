@@ -21,3 +21,9 @@ variable "public_subnet_cidr_block" {
 # Create a new PRIVATE subnet CIDR block variable below
 # Name it "private_subnet_cidr_block"
 #-----------------------------------------------
+
+// Exercise 3 Answer - private subnet CIDR Block variable
+variable "private_subnet_cidr_block" {
+  type = "list"
+  description = "Private Subnet CIDR Block"
+}
