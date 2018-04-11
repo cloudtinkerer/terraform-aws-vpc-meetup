@@ -89,3 +89,48 @@ resource "aws_route_table_association" "public_rt_association" {
   subnet_id      = "${element(aws_subnet.public_subnet.*.id, count.index)}"
   route_table_id = "${aws_route_table.public_route_table.id}"
 }
+
+#-------------------------------------------
+# Security Group - opening port 80 and 443
+#-------------------------------------------
+resource "aws_security_group" "sg_instance" {
+  vpc_id      = "${aws_vpc.main.id}"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+#-------------------------------------------
+# Create an EC2 instance below this comment block
+# Reference: https://www.terraform.io/docs/providers/aws/r/instance.html
+#
+# Requirements:
+#  - Use the security group provided above (see vpc_security_group_ids argument)
+#     Note that this attribute requires a "list" input
+#     Enclose it with brackets --> vpc_security_group_ids = ["${aws_security_group.sg_instance.id}"]
+#
+#  - "ami-fc41829e" - use this AMI ID with NGINX installed - (ami attribute)
+#     This AMI can only be used in the Sydney region
+#
+#  - Specify any of the 3 PUBLIC subnet ID (see subnet_id argument)
+#       Use the element interpolation and get the first item in the list
+#       Reference: https://www.terraform.io/docs/configuration/interpolation.html#element-list-index-
+#
+#  - Associate a Public IP address (associate_public_ip_address)
+#
+#  - Create a "Name" tag - (tags)
+#
+#-------------------------------------------
