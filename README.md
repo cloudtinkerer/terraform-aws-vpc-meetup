@@ -2,6 +2,8 @@
 
 https://www.meetup.com/Melbourne-AWS-Programming-and-Tools-Meetup/events/248727373/
 
+## Instructions
+Slides with instructions can be found in `presentation/`
 
 ## Links
 - Terraform site - https://www.terraform.io/
@@ -22,3 +24,4 @@ https://www.meetup.com/Melbourne-AWS-Programming-and-Tools-Meetup/events/2487273
 ## Git commands
 - git clone https://github.com/cloudtinkerer/terraform-aws-vpc-meetup.git
 - git checkout tags/_ex01_ -f
+
